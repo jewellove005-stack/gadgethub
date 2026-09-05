@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gadget Hub | Modern Technology</title>
+    <style>
+        :root { --ink: #17252f; --muted: #5f552d; --cream: #f4d35e; --accent: #9b6500; --line: #c9a92e; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: var(--ink); background: var(--cream); line-height: 1.6; }
+        nav { max-width: 1160px; margin: auto; padding: 25px 28px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: .08em; }
+        .logo span { color: var(--accent); }
+        nav a { color: var(--ink); text-decoration: none; margin-left: 28px; font-size: .92rem; }
+        .hero { max-width: 1160px; margin: 40px auto 55px; padding: 0 28px; display: grid; grid-template-columns: 1.05fr .95fr; gap: 70px; align-items: center; }
+        .eyebrow { color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: .18em; font-size: .75rem; }
+        h1 { font-size: clamp(3rem, 6vw, 5.8rem); line-height: .98; letter-spacing: -.06em; margin: 18px 0 25px; max-width: 650px; }
+        .hero p { color: var(--muted); font-size: 1.08rem; max-width: 510px; }
+        .button { display: inline-block; margin-top: 32px; padding: 14px 24px; border-radius: 4px; background: var(--ink); color: white; text-decoration: none; font-weight: 700; transition: .2s; }
+        .button:hover { background: var(--accent); transform: translateY(-2px); }
+        .device { min-height: 420px; border-radius: 22px; background: #d8d6ca; position: relative; overflow: hidden; }
+        .device-image { width: 100%; height: 100%; min-height: 420px; display: block; object-fit: cover; }
+        .section { background: #f4d35e; padding: 60px 28px 75px; }
+        .section-inner { max-width: 1100px; margin: auto; }
+        .section h2 { font-size: 2.4rem; letter-spacing: -.04em; margin-bottom: 10px; }
+        .section-intro { color: var(--muted); margin-bottom: 35px; }
+        .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+        .card { border: 1px solid var(--line); min-height: 280px; background: #ffe889; overflow: hidden; }
+        .card img { width: 100%; height: 150px; object-fit: cover; display: block; }
+        .card-content { padding: 18px 20px 22px; }
+        .icon { font-size: 2rem; margin-bottom: 18px; }
+        .card h3 { margin-bottom: 7px; }
+        .card p { color: var(--muted); font-size: .9rem; }
+        .collection-tools { display: flex; gap: 12px; flex-wrap: wrap; margin: 24px 0 20px; }
+        .collection-tools input, .collection-tools select { border: 1px solid var(--line); padding: 12px 14px; font: inherit; background: #fff6b8; color: var(--ink); }
+        .collection-tools input { flex: 1 1 240px; }
+        .card { transition: transform .2s, box-shadow .2s; }
+        .card:hover { transform: translateY(-4px); box-shadow: 5px 5px 0 var(--ink); }
+        .card-content { position: relative; }
+        .card button { border: 0; background: var(--ink); color: white; padding: 9px 12px; margin-top: 14px; cursor: pointer; font: inherit; font-weight: 700; }
+        .card button:hover { background: var(--accent); }
+        .status { min-height: 1.5em; color: var(--muted); font-size: .9rem; }
+        .toast { position: fixed; right: 22px; bottom: 22px; background: var(--ink); color: white; padding: 14px 18px; transform: translateY(120px); transition: transform .25s; z-index: 5; }
+        .toast.show { transform: translateY(0); }
+        .faq { background: #f8dc69; padding: 75px 28px; }
+        .faq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 30px; }
+        .faq-card { background: #ffe889; border: 1px solid var(--line); padding: 22px; }
+        .faq-card img { width: 100%; height: 145px; object-fit: cover; display: block; margin-bottom: 18px; }
+        .faq-card h3 { margin-bottom: 8px; }
+        .faq-card p { color: var(--muted); font-size: .92rem; }
+        .cta { max-width: 1100px; margin: 70px auto 35px; padding: 52px; background: var(--ink); color: white; display: flex; justify-content: space-between; align-items: center; gap: 25px; }
+        .cta p { color: #c3ced0; margin-top: 7px; }
+        .cta .button { background: var(--accent); margin-top: 0; white-space: nowrap; }
+        .contact-page { max-width: 1100px; margin: 35px auto 70px; padding: 0 28px; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 35px; margin-top: 25px; }
+        .contact-box { border: 1px solid var(--line); padding: 28px; background: #ffe889; }
+        .contact-box p { color: var(--muted); margin-top: 10px; }
+        .contact-box a { color: var(--accent); font-weight: 700; }
+        .quick-message { margin-top: 35px; border: 1px solid var(--ink); padding: 28px; background: #102b45; color: white; }
+        .quick-message h3, .quick-message label { color: white; }
+        .quick-message > p { color: #d5e0ea; }
+        .quick-message h3 { margin-bottom: 6px; }
+        .quick-message > p { color: var(--muted); margin-bottom: 20px; }
+        .message-form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .message-form label { display: grid; gap: 6px; font-weight: 700; font-size: .9rem; }
+        .message-form label:last-of-type { grid-column: 1 / -1; }
+        .message-form input, .message-form textarea { width: 100%; border: 1px solid var(--line); padding: 12px; font: inherit; color: var(--ink); background: white; }
+        .message-form textarea { min-height: 105px; resize: vertical; }
+        .message-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 10px; }
+        .message-actions button { border: 0; cursor: pointer; margin-top: 0; font: inherit; }
+        .message-actions .whatsapp { background: #218c54; }
+        .message-actions .telegram { background: #168ac2; }
+        footer { text-align: center; color: var(--muted); padding: 0 20px 30px; font-size: .85rem; }
+        @media (max-width: 760px) { nav a { display: none; } .hero { grid-template-columns: 1fr; margin-top: 25px; } .device { min-height: 300px; } .cards, .faq-grid { grid-template-columns: repeat(2, 1fr); } .cta { margin: 50px 20px; padding: 32px 25px; display: block; } .cta .button { margin-top: 25px; } }
+        @media (max-width: 480px) { .cards, .faq-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav><div class="logo"><span aria-hidden="true">◈</span> GAD<span>G</span>ET HUB</div><div><a href="#collection">Collection</a><a href="#about">About us</a><a href="#contact">Contact</a></div></nav>
+    <main>
+        <section class="hero" id="about">
+            <div><div class="eyebrow">Technology, thoughtfully selected</div><h1>Better gear for modern life.</h1><p>Discover considered phones, laptops and accessories designed to keep your world connected, productive and beautifully simple.</p><a class="button" href="#collection">Explore the collection&nbsp; →</a></div>
+            <div class="device"><img class="device-image" src="Acessories.jpg" alt="Gadget store exterior"></div>
+        </section>
+        <section class="section" id="collection"><div class="section-inner"><div class="eyebrow">Find your next essential</div><h2>Everything you need to stay connected, productive and inspired.</h2><p class="section-intro">Explore dependable devices and thoughtfully chosen accessories, each selected to make work, entertainment and everyday life a little easier.</p><div class="collection-tools"><input id="productSearch" type="search" placeholder="Search gadgets..." aria-label="Search gadgets"><select id="categoryFilter" aria-label="Filter gadgets"><option value="all">All categories</option><option>Smartphones</option><option>Laptops</option><option>Audio</option><option>Accessories</option><option>Wearables</option><option>Workstations</option></select></div><p class="status" id="resultsStatus"></p><div class="cards">
+            <article class="card"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=700&q=80" alt="Modern smartphone"><div class="card-content"><div class="icon">◉</div><h3>Smartphones</h3><p>Powerful cameras, bright displays and all-day performance.</p></div></article>
+            <article class="card"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=700&q=80" alt="Laptop on a desk"><div class="card-content"><div class="icon">▱</div><h3>Laptops</h3><p>Focused tools for creative work, business and study.</p></div></article>
+            <article class="card"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=80" alt="Wireless headphones"><div class="card-content"><div class="icon">⌁</div><h3>Audio</h3><p>Immersive sound through refined headphones and speakers.</p></div></article>
+            <article class="card"><img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=700&q=80" alt="Wireless earbuds"><div class="card-content"><div class="icon">◌</div><h3>Wearables</h3><p>Smart watches and earbuds that keep you connected on the move.</p></div></article>
+            <article class="card"><img src="replacement.jpg" alt="Samsung flexible phone"><div class="card-content"><div class="icon">▣</div><h3>Flexible Phone Options</h3><p>Choose a comfortable, capable phone that adapts to your routine and keeps every task within reach.</p></div></article>
+            <article class="card"><img src="power bank.jpg" alt="Power bank for a computer setup"><div class="card-content"><div class="icon">▣</div><h3>Power & Workstations</h3><p>Keep your devices charged and create a comfortable, capable setup for your daily workflow.</p></div></article>
+             <article class="card"><img src="projector.jpg" alt="Home projector"><div class="card-content"><div class="icon">▣</div><h3>Projectors</h3><p>Turn any room into an engaging viewing space with bright, simple entertainment for everyone.</p></div></article>
+             <article class="card"><img src="charger.jpg" alt="Phone charger and accessories"><div class="card-content"><div class="icon">▣</div><h3>Accessories</h3><p>Complete your setup with dependable cases, chargers and smart essentials made for everyday use.</p></div></article>
+
+
+        </div></div></section>
+        <section class="faq"><div class="section-inner"><div class="eyebrow">Quick answers</div><h2>Things to know about gadgets.</h2><p class="section-intro">Simple guidance before you choose your next device.</p><div class="faq-grid">
+            <article class="faq-card"><img src="system 1.jpg" alt="Laptop for everyday work"><h3>How long should a laptop last?</h3><p>Most quality laptops can serve you well for four to seven years with software updates and sensible care.</p></article>
+            <article class="faq-card"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=700&q=80" alt="Smartphone in hand"><h3>What matters most in a phone?</h3><p>Prioritize battery life, camera quality, display, storage and reliable update support for your needs.</p></article>
+            <article class="faq-card"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=80" alt="Wireless headphones"><h3>Are expensive headphones better?</h3><p>Not always. Comfort, fit, battery life and sound tuning matter more than price alone.</p></article>
+        </div></div></section>
+        <section class="cta"><div><h2>Ready to upgrade?</h2><p>Find technology that works as hard as you do.</p></div><a class="button" href="#contact">Contact Voltura&nbsp; →</a></section>
+        <section class="contact-page" id="contact"><div class="eyebrow">Get in touch</div><h2>Visit or contact us.</h2><div class="contact-grid"><div class="contact-box"><h3>Our location</h3><p>No. 4 Tande Street,<br>Agbara, Badagry,<br>Lagos State, Nigeria.</p></div><div class="contact-box"><h3>Contact details</h3><p>Have a question about our gadgets?</p><p><a href="mailto:hello@voltura.example">hello@voltura.example</a><br><a href="tel:+2348000000000">+234 800 000 0000</a></p></div></div>
+            <div class="quick-message"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80" alt="Gadget store interior" style="width:100%; height:190px; object-fit:cover; margin-bottom:22px;"><h3>Send a quick message</h3><p>Tell us what you want and choose how you would like to send it.</p><form class="message-form" onsubmit="sendMessage(event)"><label>Name<input id="name" type="text" required placeholder="Your name"></label><label>Phone number<input id="phone" type="tel" required placeholder="Your phone number"></label><label>Email address<input id="email" type="email" required placeholder="you@example.com"></label><label>What do you want?<textarea id="request" required placeholder="Tell us what you need..."></textarea></label><div class="message-actions"><button class="button" type="submit" data-channel="email">Send by email</button><button class="button whatsapp" type="button" data-channel="whatsapp">WhatsApp</button><button class="button telegram" type="button" data-channel="telegram">Telegram</button></div></form></div>
+        </section>
+    </main>
+    <footer>© 2026 Gadget Hub. Curated technology for everyday living.</footer><div class="toast" id="toast" role="status"></div>
+    <script>
+        function messageText() { return `Name: ${name.value}\nPhone: ${phone.value}\nEmail: ${email.value}\n\nRequest: ${request.value}`; }
+        function sendMessage(event) { event.preventDefault(); window.location.href = `mailto:hello@voltura.example?subject=Quick message from ${encodeURIComponent(name.value)}&body=${encodeURIComponent(messageText())}`; }
+        document.querySelectorAll('[data-channel]').forEach(button => button.addEventListener('click', () => { const text = encodeURIComponent(messageText()); if (button.dataset.channel === 'whatsapp') window.open(`https://wa.me/2348000000000?text=${text}`, '_blank'); else if (button.dataset.channel === 'telegram') window.open(`https://t.me/share/url?url=&text=${text}`, '_blank'); }));
+
+        const cards = [...document.querySelectorAll('.card')];
+        const search = document.getElementById('productSearch');
+        const category = document.getElementById('categoryFilter');
+        const status = document.getElementById('resultsStatus');
+        const toast = document.getElementById('toast');
+        cards.forEach(card => {
+            const title = card.querySelector('h3').textContent;
+            const button = document.createElement('button');
+            button.textContent = 'Ask about this';
+            button.type = 'button';
+            button.addEventListener('click', () => {
+                document.getElementById('request').value = `I would like to know more about ${title}.`;
+                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+                toast.textContent = `${title} added to your enquiry`;
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2500);
+            });
+            card.querySelector('.card-content').appendChild(button);
+        });
+        function filterProducts() {
+            const query = search.value.toLowerCase().trim();
+            const selected = category.value;
+            let visible = 0;
+            cards.forEach(card => {
+                const matchesText = card.textContent.toLowerCase().includes(query);
+                const matchesCategory = selected === 'all' || card.querySelector('h3').textContent === selected;
+                const show = matchesText && matchesCategory;
+                card.hidden = !show;
+                if (show) visible++;
+            });
+            status.textContent = `${visible} gadget${visible === 1 ? '' : 's'} found`;
+        }
+        search.addEventListener('input', filterProducts);
+        category.addEventListener('change', filterProducts);
+        filterProducts();
+    </script>
+</body>
+</html>
