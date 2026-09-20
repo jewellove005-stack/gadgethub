@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atmosphere OS | Meteorological Intelligence</title>
+  
+  <link rel="manifest" href="manifest.json">
+
+   <style>
+       * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #6e540c 0%, #0284c7 50%, #bae6fd 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #ffffff;
+      padding: 20px;
+    }
+
+      .app-wrapper {
+      background: rgba(15, 23, 42, 0.55); /* Solid deep dark transparency layer */
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 28px;
+      padding: 40px 30px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+   
+    .app-header {
+      margin-bottom: 35px;
+    }
+
+    .app-header h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    .app-header p {
+      font-size: 0.rem;
+      color: #bae6fd;
+      opacity: 0.85;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* 4. Responsive Input Search Box Container Form */
+    .search-container {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 35px;
+    }
+
+    .search-container input {
+      flex-grow: 1;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 14px 18px;
+      border-radius: 14px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .search-container input::placeholder {
+      color: #e0f2fe;
+      opacity: 0.6;
+    }
+
+    .search-container input:focus {
+      background: rgba(255, 255, 255, 0.22);
+      border-color: rgba(255, 255, 255, 0.45);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    .search-container button {
+      background: #ffffff;
+      color: #0369a1;
+      border: none;
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .search-container button:hover {
+      background: #f0f9ff;
+      transform: translateY(-2px);
+    }
+
+    .search-container button:active {
+      transform: translateY(0);
+    }
+
+    /* 5. Meteorological Metric Card Showcase Display */
+    .weather-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 35px 20px;
+    }
+
+    #location-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      margin-bottom: 12px;
+    }
+
+    .metrics-display {
+      margin: 20px 0;
+    }
+
+    #temperature-digits {
+      font-size: 4.8rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .unit {
+      font-size: 2.2rem;
+      font-weight: 300;
+      vertical-align: super;
+      color: #38bdf8;
+      margin-left: 2px;
+    }
+
+    #weather-condition {
+      font-size: 1.05rem;
+      color: #f0f9ff;
+      opacity: 0.85;
+    }
+
+    /* 6. Dynamic Real-time Network Status Alert Banner */
+    #offline-banner {
+      display: none;
+      background: #e11d48;
+      color: #ffffff;
+      text-align: center;
+      padding: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+  </style>
+</head>
+<body>
+
+   <div id="offline-banner"></div>
+
+   <main class="app-wrapper">
+    
+    <header class="app-header">
+      <h1>🌦️ Atmosphere OS</h1>
+      <p>Meteorological Intelligence</p>
+    </header>
+
+       <section class="search-container">
+      <input type="text" id="city-input" placeholder="Enter target city name...">
+      <button id="search-btn">Fetch</button>
+    </section>
+
+        <section class="weather-card">
+      <h2 id="location-name">----</h2>
+      
+      <div class="metrics-display">
+        <span id="temperature-digits">--</span><span class="unit">°C</span>
+      </div>
+      
+      <p id="weather-condition">Please execute a location query above.</p>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
